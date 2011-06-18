@@ -1,4 +1,2 @@
-puts "got loaded"
-puts $LOAD_PATH
-require 'file.rb'
+require 'herbert/loader'
 
