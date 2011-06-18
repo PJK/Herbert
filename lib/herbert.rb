@@ -1,3 +1,4 @@
-module Herbert
-  # Your code goes here...
-end
+puts "got loaded"
+puts $LOAD_PATH
+require 'file.rb'
+
