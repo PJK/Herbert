@@ -1,9 +1,13 @@
-module Herbert
-  # Set up the logger
-  require 'logger'
+require 'logger'
+require 'mongo'
+require 'memcache'
+require 'sinatra/base'
+require 'kwalify'
+require 'active_support'
 
+module Herbert
   ::Logger.class_eval do
-  # prefix all Herbert's log with [Herbert]
+		# prefix all Herbert's log with [Herbert]
     [:fatal, :error, :warn, :info, :debug].each do |type|
       name = "h_" + type.to_s
       define_method name do |message|
@@ -19,7 +23,7 @@ module Herbert
       @@logger
     end
   end
-
+	
   module Loader
     $HERBERT_PATH = File.dirname(__FILE__)
     log.h_info("Here comes Herbert. He's a berserker!")
@@ -53,7 +57,7 @@ module Herbert
       app.register Herbert::Ajaxify
       app.helpers Sinatra::Log
       app.register Sinatra::Log::Extension
-    app.register Herbert::ResourceLoader
+			app.register Herbert::ResourceLoader
     end
   end
 end

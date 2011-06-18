@@ -31,9 +31,7 @@ module Sinatra
   end
 
   
-  module Validation
-    require 'kwalify'
-    
+  module Validation    
     module Extension
       # Um, dragons... Fucking swarm... But I'll try to explain this anyway.
       # We'll scan the defined settings.validation[:path] dir for dirs. Those found dirs

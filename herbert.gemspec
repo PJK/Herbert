@@ -13,9 +13,18 @@ Gem::Specification.new do |s|
   s.description = <<-desc
 Herbert makes development of JSON REST API servers ridiculously simple.
 It provides a bunch of useful helpers and conventions to speed up development.
+Input validation, logs and advanced AJAX support are baked in.
 Herbert is very lightweight and transparent, making it easy to use & modify.
 desc
 
+	s.add_dependency("sinatra","= 1.2.6")
+	s.add_dependency("memcache-client")
+	s.add_dependency("mongo")
+	s.add_dependency("syslogger")
+	s.add_dependency("kwalify","= 0.7.2")
+	s.add_dependency("activesupport")
+	s.add_dependency("bson_ext",">= 1.3.1")
+	
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }

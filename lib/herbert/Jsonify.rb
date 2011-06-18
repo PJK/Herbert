@@ -1,6 +1,3 @@
-require 'active_support'
-
-
 
 class True
   def to_json
