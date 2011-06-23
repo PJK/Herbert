@@ -51,6 +51,8 @@ end
 
 module Sinatra
   class NotFound
+		
+		# Enables Sinatra built-in exceptions to be logged
     def to_hash
       {
         :code => 1003,

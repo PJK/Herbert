@@ -10,6 +10,7 @@ module Herbert
       @@provider = prov
     end
 
+		# Creates log message and passes it to stograge provider
     def self.log(request, response)
       log = {
         "request"=> {
@@ -44,7 +45,7 @@ module Herbert
         }
       }
 
-      # Extract tha headerz
+      # Extract the headers
       request.env.keys.each do |key|
         if key =~ /^HTTP_/ then
           log['request']['headers'][key.gsub(/^HTTP_/,'')] = request.env[key]
@@ -52,7 +53,7 @@ module Herbert
       end
       # do not log bodies from GET/DELETE/HEAD
       log["request"].delete("body") if %{GET DELETE HEAD}.include?(log["request"]["method"])
-      # If an error occured, add it
+      # If an error has occured, add it
       log["response"]["error"] = request.env['sinatra.error'].to_hash if request.env['sinatra.error']
       id = @@provider.save(log)
       response['X-RequestId'] = id.to_s if @@provider.respond_to?(:id) && response.app.settings.append_log_id
@@ -60,6 +61,8 @@ module Herbert
   end
 	
 	module LoggingProviders
+		
+		# Dumps all logs to STDOUT with pretty formating
 		class StdoutProvider
 			def initialize
 				require 'pp'
@@ -70,10 +73,9 @@ module Herbert
 			end
 		end
 
+		# Persists log in DB
 		class MongoProvider
-
-			Collection = 'logs'
-    
+			Collection = 'logs' 
 			def initialize(db)
 				@db = db
 			end

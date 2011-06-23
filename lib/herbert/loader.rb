@@ -19,11 +19,14 @@ module Herbert
   # Plug it in, the monkey style :]
   module ::Kernel
     @@logger = Logger.new(STDOUT)
+		
+		# @return [Logger] The globally available logger
     def log
       @@logger
     end
   end
 	
+	# Bootstraps Herbert
   module Loader
     $HERBERT_PATH = File.dirname(__FILE__)
     log.h_info("Here comes Herbert. He's a berserker!")
@@ -31,12 +34,13 @@ module Herbert
     %w{Utils Jsonify Configurator Error Services Ajaxify AppLogger Log Resource}.each {|file|
       require $HERBERT_PATH + "/#{file}.rb"
     }
-
+		
+		# Sets up some default settings and loads all components
     def self.registered(app)
       # Set some default
       # TODO to external file?
-      app.set :log_requests, :db
-      app.enable :append_log_id # If logs go to Mongo, IDs will be appended to responses
+      app.set :log_requests, :db unless app.log_requests
+      app.enable :append_log_id unless app.append_log_id # If logs go to Mongo, IDs will be appended to responses
       ## register the ;debug flag patch first to enable proper logging
       app.register Herbert::Configurator::Prepatch
       # the logger

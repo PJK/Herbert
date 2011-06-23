@@ -1,2 +1,0 @@
-puts "file got loaded"
-

@@ -1,5 +1,9 @@
 module Herbert
+	
+	# Enhances AJAJ/AJAX support
   module Ajaxify
+		
+		# Headers to send with each request
     Headers = {
       'Access-Control-Allow-Methods' => %w{POST GET PUT DELETE OPTIONS},
       'Access-Control-Allow-Headers' => %w{Content-Type X-Requested-With},
@@ -8,6 +12,9 @@ module Herbert
       'X-Build' => [Herbert::Utils.version]
     }
 
+		# * Loads config/headers.rb
+		# * Enables header processing
+		# * Registers CORS proxy for external services
     def self.registered(app)
       # Heeeaderzz!!! Gimme heaaaderzzz!!!
       path = File.join(app.settings.root, 'config','headers.rb')

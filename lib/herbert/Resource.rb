@@ -1,19 +1,15 @@
 module Herbert
-  # This class allows you to organize code by REST resources.
-	# Any class that subclasses Herbert::Resource is automatically "merged" 
-	# into the application. Resource name will be derived from the class name.
+	# When extended, it virtually "merges" the overriding class into the app.
 	# 
-	# For instance,
-	#   class Messages < Herbert::Resource
-  #     get '/' do
-  #    	  "here's a message for you!"
-  #     end
+	#  class Messages
+	#   get '/'
 	#   end
-	# will respond to 
-	#   GET /messages/
-	# 
-	
+	#  end
+	# will enable your app to respond to
+	#  GET /messages/
   class Resource
+		
+		# Instantizing this class is forbidden
     def self.new
       raise StandardError.new('You are not allowed to instantize this class directly')
     end
@@ -28,15 +24,17 @@ module Herbert
     end
   end
 
-	# Loads all Herbert resources
+	# Loads all Herberts' resources
   module ResourceLoader
+		
+		# Loads all application resources
     def self.registered(app)
 			# Inject refence to the app into Resource
       Resource.class_eval do
 				define_singleton_method :app do
 					app
 				end
-			end
+			end			
 			
 			# And load all resource definitions
       path = File.join(app.settings.root, 'Resources')

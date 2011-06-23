@@ -20,7 +20,7 @@ module Sinatra
     class Sinatra::Request
 
       @is_json = false
-      # Encapsulates #Rack::Request.body in order to remove #IO.String
+      # Encapsulates Rack::Request.body in order to remove #IO.String
       # and therefore to enable repeated reads
       def body_raw
         @body_raw ||= body(true).read
@@ -39,7 +39,7 @@ module Sinatra
         end
       end
 
-      # Overrides #Rack::Request.body, returns native #Hash
+      # Overrides Rack::Request.body, returns native #Hash
       # Preserves access to underlying @env['rack.input'] #IO.String
       def body(rack = false)
         if rack then
