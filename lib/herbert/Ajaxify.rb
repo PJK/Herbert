@@ -30,7 +30,7 @@ module Herbert
       end
 
       app.before do
-      # Add the headers to the response
+				# Add the headers to the response
         Headers.each {|name, value|
           value = [value] unless value.is_a?(Array)
           value.map! {|val|
@@ -42,16 +42,15 @@ module Herbert
 
       # Proxy for not CORS enables services such as 
       # Google Maps
-      # /proxy/<url to fetch>
-      if app.get '/proxy/:url' do
-        url = URI.parse(URI.decode(params[:url]))
-        res = Net::HTTP.start(url.host, 80) {|http|
-          http.get(url.path + (url.query ? '?' + url.query : ''))
-        }
-        response['content-type'] = res['content-type']
-        res.body
-      end
+      # /proxy/url?=
+      get '/proxy/' do
+				url = URI.parse(URI.decode(params[:url]))
+				res = Net::HTTP.start(url.host, 80) {|http|
+					http.get(url.path + '?' + url.query)
+				}
+				response['content-type'] = res['content-type']
+				res.body
+			end
     end
-   end
-  end
+	end
 end

@@ -39,8 +39,8 @@ module Herbert
     def self.registered(app)
       # Set some default
       # TODO to external file?
-      app.set :log_requests, :db unless app.log_requests
-      app.enable :append_log_id unless app.append_log_id # If logs go to Mongo, IDs will be appended to responses
+      app.set :log_requests, :db unless app.settings.log_requests
+      app.enable :append_log_id # If logs go to Mongo, IDs will be appended to responses
       ## register the ;debug flag patch first to enable proper logging
       app.register Herbert::Configurator::Prepatch
       # the logger
