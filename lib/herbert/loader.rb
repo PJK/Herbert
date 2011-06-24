@@ -65,7 +65,7 @@ module Herbert
       app.register Herbert::Ajaxify
       app.helpers Sinatra::Log
       app.register Sinatra::Log::Extension
-			app.register Herbert::ResourceLoader
+			app.register Herbert::ResourceLoader if app.respond_to?(:resources) && app.resources
     end
   end
 end
