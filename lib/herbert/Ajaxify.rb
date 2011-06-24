@@ -48,7 +48,7 @@ module Herbert
       # Proxy for not CORS enables services such as 
       # Google Maps
       # /proxy/url?=
-      get '/proxy/' do
+      app.get '/proxy/' do
 				url = URI.parse(URI.encode(params[:url]))
 				res = Net::HTTP.start(url.host, 80) {|http|
 					http.get(url.path + '?' + url.query)

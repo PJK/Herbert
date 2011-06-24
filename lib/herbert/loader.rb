@@ -4,6 +4,8 @@ require 'memcache'
 require 'sinatra/base'
 require 'kwalify'
 require 'active_support'
+$:.unshift(File.dirname(__FILE__))
+require 'version'
 
 module Herbert
   ::Logger.class_eval do
@@ -29,7 +31,7 @@ module Herbert
 	# Bootstraps Herbert
   module Loader
     $HERBERT_PATH = File.dirname(__FILE__)
-    log.h_info("Here comes Herbert. He's a berserker!")
+    log.h_info("Here comes Herbert (v#{Herbert::VERSION}). He's a berserker!")
     # because order matters
     %w{Utils Jsonify Configurator Error Services Ajaxify AppLogger Log Resource}.each {|file|
       require $HERBERT_PATH + "/#{file}.rb"
@@ -39,7 +41,7 @@ module Herbert
     def self.registered(app)
       # Set some default
       # TODO to external file?
-      app.set :log_requests, :db unless app.settings.log_requests
+      app.set :log_requests, :db unless app.respond_to? :log_requests
       app.enable :append_log_id # If logs go to Mongo, IDs will be appended to responses
       ## register the ;debug flag patch first to enable proper logging
       app.register Herbert::Configurator::Prepatch
@@ -56,8 +58,10 @@ module Herbert
       app.helpers Sinatra::Database
       app.register Sinatra::Cache
       app.helpers Sinatra::Cache
-      app.register Sinatra::Validation::Extension
-      app.helpers Sinatra::Validation::Helpers
+      if app.respond_to?(:validation) && app.validation then
+				app.register Sinatra::Validation::Extension
+				app.helpers Sinatra::Validation::Helpers
+			end
       app.register Herbert::Ajaxify
       app.helpers Sinatra::Log
       app.register Sinatra::Log::Extension
