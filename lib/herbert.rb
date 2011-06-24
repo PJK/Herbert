@@ -5,17 +5,19 @@ class Sinatra::Base
 		begin
 			call!(env)
 		rescue => e
-			[500, 
-				{"Content-Type" => "application/json;charset=utf-8"},
-				Yajl::Encoder.encode({
-					:error => {
-						:code => 1,
-						:message => e,
-						:backtrace => e.backtrace
-					}
+			res = [500,{},[]]
+			if (ENV['HERBERT_DEBUG'].to_i==1) || (ENV['RACK_ENV'] =~ /debug/) then
+				res[1] = {"Content-Type" => "application/json;charset=utf-8"}
+				res[2] = Yajl::Encoder.encode({
+						:error => {
+							:code => 1,
+							:message => e,
+							:backtrace => e.backtrace
+						}
 				
-				})
-			]
+					})
+			end
+			res
 		end
 	end
 end
