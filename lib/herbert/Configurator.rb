@@ -1,6 +1,10 @@
 module Herbert
   module Configurator
+		
+		# Sets up the environment so we can set up Herbert
     module Prepatch
+			
+			#
       def self.registered(app)
         # Enable envs such as development;debug, where debug is herberts debug flag
         env = ENV['RACK_ENV'].split(';')

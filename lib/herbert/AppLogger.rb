@@ -2,15 +2,22 @@ module Herbert
   # Full-fledged request & response logger with
   # several storage providers (console, mongo, cache)
   class AppLogger
+		
+		# Provider getter
     def self.provider
       @@provider
     end
-
+		
+		# Provider setter
     def self.provider=(prov)
       @@provider = prov
     end
 
 		# Creates log message and passes it to stograge provider
+		#
+		# @param [Sinatra::Request]
+		# @param [Sinatra::Response]
+		#
     def self.log(request, response)
       log = {
         "request"=> {
@@ -80,10 +87,15 @@ module Herbert
 				@db = db
 			end
 
+			# @param [Hash]
 			def save(log)
 				@db[Collection].save(log)
 			end
     
+			# FIXME
+			# "Flag" indicating that this provider returns IDs
+			# 
+			# @return [Boolean]
 			def id
 				true
 			end

@@ -13,8 +13,13 @@ module Herbert
     }
 
 		# * Loads config/headers.rb
+		# 
 		# * Enables header processing
+		# 
 		# * Registers CORS proxy for external services
+		# 
+		# @param [Sinatra::Base descendant]
+		#
     def self.registered(app)
       # Heeeaderzz!!! Gimme heaaaderzzz!!!
       path = File.join(app.settings.root, 'config','headers.rb')
@@ -44,7 +49,7 @@ module Herbert
       # Google Maps
       # /proxy/url?=
       get '/proxy/' do
-				url = URI.parse(URI.decode(params[:url]))
+				url = URI.parse(URI.encode(params[:url]))
 				res = Net::HTTP.start(url.host, 80) {|http|
 					http.get(url.path + '?' + url.query)
 				}
