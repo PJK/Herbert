@@ -1,9 +1,7 @@
 require 'logger'
 require 'mongo'
 require 'memcache'
-require 'sinatra/base'
 require 'kwalify'
-require 'active_support'
 $:.unshift(File.dirname(__FILE__))
 require 'version'
 
@@ -34,9 +32,8 @@ module Herbert
     log.h_info("Here comes Herbert (v#{Herbert::VERSION}). He's a berserker!")
     # because order matters
     %w{Utils Jsonify Configurator Error Services Ajaxify AppLogger Log Resource}.each {|file|
-      require $HERBERT_PATH + "/#{file}.rb"
+      require file
     }
-		
 		# Sets up some default settings and loads all components
     def self.registered(app)
       # Set some default
