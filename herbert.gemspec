@@ -8,14 +8,14 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Pavel Kalvoda"]
   s.email       = ["me@pavelkalvoda.com","pavel@drinkwithabraham.com"]
-  #s.homepage    = ""
+  s.homepage    = "https://github.com/PJK/Herbert"
   s.summary     = %q{Sinatra-based toolset for creating JSON API servers backed by Mongo & Memcached}
   s.description = <<-desc
 Herbert makes development of JSON REST API servers ridiculously simple.
 It provides a bunch of useful helpers and conventions to speed up development.
 Input validation, logs and advanced AJAX support are baked in.
 Herbert is very lightweight and transparent, making it easy to use & modify.
-desc
+	desc
 
 	s.add_dependency("sinatra","= 1.2.6")
 	s.add_dependency("memcache-client")

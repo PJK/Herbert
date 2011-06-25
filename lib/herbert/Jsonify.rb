@@ -43,10 +43,10 @@ module Sinatra
       # Preserves access to underlying @env['rack.input'] #IO.String
       def body(rack = false)
         if rack then
-        super()
+					super()
         else
           ensure_encoded
-        @body_decoded
+					@body_decoded
         end
       end
 

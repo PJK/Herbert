@@ -11,7 +11,7 @@ module Herbert
     [:fatal, :error, :warn, :info, :debug].each do |type|
       name = "h_" + type.to_s
       define_method name do |message|
-        send(type, "[Herbert] " + message)
+        send(type, "[Herberta] " + message)
       end
     end
   end
@@ -32,7 +32,7 @@ module Herbert
     log.h_info("Here comes Herbert (v#{Herbert::VERSION}). He's a berserker!")
     # because order matters
     %w{Utils Jsonify Configurator Error Services Ajaxify AppLogger Log Resource}.each {|file|
-      require file
+			require file
     }
 		# Sets up some default settings and loads all components
     def self.registered(app)

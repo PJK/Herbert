@@ -16,12 +16,12 @@ module Sinatra
         when :stdout
           provider = Herbert::LoggingProviders::StdoutProvider.new
         else
-					app.log_requests.respond_to?(:save) ? provider = app.log_requests : log.h_fatal("Unknown logs storage provider.")
-        end
+					provider = app.log_requests
+				end
         Herbert::AppLogger.provider = provider
         # Make the app automatically inject refernce to iteself into the response,
         # so Sinatra::Response::finish can manipulate it
-        app.before { response.app = self; @timer_start = Time.new }
+        app.before { response.app = app; @timer_start = Time.new; puts 'before'}
         app.after { @timer_stop = Time.new}
       #app.before { log_request }
       end

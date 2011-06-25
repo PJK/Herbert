@@ -1,5 +1,11 @@
 require 'sinatra/base'
 require 'yajl'
+
+#
+# By default, if there was an error in Herbert, Sinatra would crash without
+# catching the error and Rack would repond with empty 200 response afterwards.
+# This emulates somewhat consistent behaviour and encapsulation.
+#
 class Sinatra::Base
 	def call(env)
 		begin
