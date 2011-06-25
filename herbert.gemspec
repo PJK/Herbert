@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Pavel Kalvoda"]
   s.email       = ["me@pavelkalvoda.com","pavel@drinkwithabraham.com"]
-  s.homepage    = "https://github.com/PJK/Herbertgit s"
+  s.homepage    = "https://github.com/PJK/Herbert"
   s.summary     = %q{Sinatra-based toolset for creating JSON API servers backed by Mongo & Memcached}
   s.description = <<-desc
 Herbert makes development of JSON REST API servers ridiculously simple.
