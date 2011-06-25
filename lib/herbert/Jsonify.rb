@@ -4,6 +4,12 @@ class True
   end
 end
 
+class BSON::ObjectId
+  def to_json(*a)
+    "\"#{to_s}\""
+  end
+end
+
 module Sinatra
 
   # Makes JSON the default DDL of HTTP communication
