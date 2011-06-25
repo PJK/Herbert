@@ -6,5 +6,15 @@ module Herbert
       version[0] = '' if version[0] == 'v'
       version
     end
+    
+    module Helpers
+      def version
+        Utils.version
+      end
+      
+      def nonce(length = 8)
+        ActiveSupport::SecureRandom.hex(length)
+      end
+    end
   end
 end

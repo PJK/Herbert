@@ -63,6 +63,7 @@ module Herbert
       app.helpers Sinatra::Log
       app.register Sinatra::Log::Extension
 			app.register Herbert::ResourceLoader if app.respond_to?(:resources) && app.resources
+      app.register Herbert::Utils::Helpers
     end
   end
 end
