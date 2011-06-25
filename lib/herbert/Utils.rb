@@ -20,8 +20,11 @@ module Herbert
         Utils.version
       end
       
-      def nonce(length = 8)
-        ActiveSupport::SecureRandom.hex(length)
+      Range = [('0'..'9').to_a,('a'..'z').to_a].flatten
+      def nonce(length = 16)
+        res = ''
+        length.times  {res += Range[rand(36)]}
+        res
       end
       
       def db_id(source)

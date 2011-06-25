@@ -9,21 +9,21 @@ module Herbert
 
       # Code to text translation
       Translation = {
-        "1000" => ["Malformated JSON", 400],
-        "1001" => ["Non-unicode encoding",400],
-        "1002" => ["Non-acceptable Accept header", 406],
-        "1003" => ["Not found", 404],
-        "1010" => ["Missing request body", 400],
-        "1011" => ["Missign required parameter", 400],
-        "1012" => ["Invalid request body", 400],
-        "1020" => ["Unspecified error occured", 500]
+        1000 => ["Malformated JSON", 400],
+        1001 => ["Non-unicode encoding",400],
+        1002 => ["Non-acceptable Accept header", 406],
+        1003 => ["Not found", 404],
+        1010 => ["Missing request body", 400],
+        1011 => ["Missign required parameter", 400],
+        1012 => ["Invalid request body", 400],
+        1020 => ["Unspecified error occured", 500]
       }
 
       def initialize(errno, http_code = nil, errors = [])
-        raise ArgumentError, "Unknown error code: #{errno}" unless Translation.has_key?(errno.to_s)
-        @code = errno
-        @message = Translation[@code.to_s][0]
-        @http_code = (http_code || Translation[@code.to_s][1])
+        raise ArgumentError, "Unknown error code: #{errno}" unless Translation.has_key?(errno.to_i)
+        @code = errno.to_i
+        @message = Translation[@code][0]
+        @http_code = (http_code || Translation[@code][1])
         @errors = errors.to_a
       end
 
@@ -40,6 +40,7 @@ module Herbert
       def self.merge(errors)
         if errors.is_a? Hash then
           Translation.merge!(errors)
+                    puts Translation.inspect
         else
           raise ArgumentError("Expected a hash of codes and descriptions")
         end
