@@ -15,6 +15,10 @@ module Herbert
       def nonce(length = 8)
         ActiveSupport::SecureRandom.hex(length)
       end
+      
+      def db_id(source)
+        BSON::ObjectId.from_string(source.to_s)
+      end
     end
   end
 end
