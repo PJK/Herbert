@@ -1,3 +1,11 @@
+class Hash
+  def delete_all(*names)
+    names.each {|name| delete(name)}
+    self
+  end
+end
+
+
 module Herbert
   module Utils
     # Assert v<major>.<minor>.<etc> tags
