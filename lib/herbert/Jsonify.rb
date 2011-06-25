@@ -1,12 +1,12 @@
 class True
-  def to_json
+  def as_json
     return 1
   end
 end
 
 class BSON::ObjectId
-  def to_json(*a)
-    "\"#{to_s}\""
+  def as_json(*a)
+    to_s
   end
 end
 
@@ -71,7 +71,7 @@ module Sinatra
         @app.log_request
         if json?
           log.h_debug("Serializing response into JSON")
-          @body = [ActiveSupport::JSON.encode(@body)]
+          @body = [@body.to_json]
         end
         super
       end
