@@ -1,4 +1,3 @@
-
 class True
   def to_json
     return 1

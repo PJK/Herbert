@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require 'yajl'
+require 'active_support'
 
 #
 # By default, if there was an error in Herbert, Sinatra would crash without
@@ -14,10 +14,10 @@ class Sinatra::Base
 			res = [500,{},[]]
 			if (ENV['HERBERT_DEBUG'].to_i==1) || (ENV['RACK_ENV'] =~ /debug/) then
 				res[1] = {"Content-Type" => "application/json;charset=utf-8"}
-				res[2] = Yajl::Encoder.encode({
+				res[2] = ActiveSupport::JSON.encode({
 						:error => {
 							:code => 1,
-							:message => e,
+							:message => e.to_s,
 							:backtrace => e.backtrace
 						}
 				

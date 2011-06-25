@@ -14,7 +14,7 @@ module Herbert
       raise StandardError.new('You are not allowed to instantize this class directly')
     end
 		
-		# Translates Sintra DSL calls
+		# Translates Sinatra DSL calls
     def self.inherited(subclass)
       %w{get post put delete}.each do |verb|
         subclass.define_singleton_method verb.to_sym  do |route, &block|
