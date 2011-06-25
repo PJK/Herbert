@@ -71,7 +71,7 @@ module Sinatra
         @app.log_request
         if json?
           log.h_debug("Serializing response into JSON")
-          @body = [@body.to_json]
+          @body = [ActiveSupport::JSON.encode(@body)]
         end
         super
       end
