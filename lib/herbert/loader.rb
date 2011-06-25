@@ -11,7 +11,7 @@ module Herbert
     [:fatal, :error, :warn, :info, :debug].each do |type|
       name = "h_" + type.to_s
       define_method name do |message|
-        send(type, "[Herberta] " + message)
+        send(type, "[Herbert] " + message)
       end
     end
   end
