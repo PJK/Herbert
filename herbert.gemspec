@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Sinatra-based toolset for creating JSON API servers backed by Mongo & Memcached}
   s.description = <<-desc
 Herbert makes development of JSON REST API servers ridiculously simple.
-It provides a bunch of useful helpers and conventions to speed up development.
+It provides a set of useful helpers and conventions to speed up development.
 Input validation, logs and advanced AJAX support are baked in.
 Herbert is very lightweight and transparent, making it easy to use & modify.
 	desc
