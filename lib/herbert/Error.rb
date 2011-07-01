@@ -26,7 +26,7 @@ module Herbert
           }
           # Add backtrace, Kwalify validation report and other info if
           # running in development mode
-          if settings.development? then
+          if (settings.development? || settings.test?) then
             log.h_debug("Adding stacktrace and report to the error")
             body[:error][:stacktrace] = err.backtrace.join("\n")
             body[:error][:info] = (err.errors || [])
@@ -34,9 +34,9 @@ module Herbert
           response.body = body
         else
         # If the exception is not manageable, bust it
-          log.h_error("A non-managed error occured! Backtrace: #{err.backtrace.join("\n")}")
+          log.h_error("A non-managed error occured! Backtrace: #{err.to_s + err.backtrace.join("\n")}")
           response.status = 500
-          response.body = settings.development? ? err.to_s : nil
+          response.body = (settings.development? || settings.test?) ? err.to_s : nil
         end
       end
 

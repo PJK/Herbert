@@ -7,7 +7,7 @@ module Herbert
 			#
       def self.registered(app)
         # Enable envs such as development;debug, where debug is herberts debug flag
-        if ENV['RACK_ENV'] === nil then
+        if (ENV['RACK_ENV'] === nil) || (ENV['RACK_ENV'] === 'test') then
           app.set :environment, :test
           ENV['HERBERT_DEBUG'] = '1'
         end
