@@ -40,7 +40,6 @@ module Herbert
       def self.merge(errors)
         if errors.is_a? Hash then
           Translation.merge!(errors)
-                    puts Translation.inspect
         else
           raise ArgumentError("Expected a hash of codes and descriptions")
         end

@@ -2,6 +2,7 @@ require 'logger'
 require 'mongo'
 require 'memcache'
 require 'kwalify'
+require 'yaml'
 $:.unshift(File.dirname(__FILE__))
 require 'version'
 
@@ -42,12 +43,12 @@ module Herbert
       app.enable :append_log_id # If logs go to Mongo, IDs will be appended to responses
       ## register the ;debug flag patch first to enable proper logging
       app.register Herbert::Configurator::Prepatch
-      # the logger
-      log.level = app.development? ? Logger::DEBUG : Logger::INFO
-      # the extensions
-      app.register Herbert::Configurator
       app.register Herbert::Configurator::Helpers
       app.helpers Herbert::Configurator::Helpers
+      # the logger
+      log.level = app.debug? ? Logger::DEBUG : Logger::INFO
+      # the extensions
+      app.register Herbert::Configurator
       app.register Herbert::Error
       app.helpers Herbert::Error::Helpers
       app.register Sinatra::Jsonify

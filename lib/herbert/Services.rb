@@ -59,7 +59,7 @@ module Sinatra
             Dir.new(resource_dir).each do |verb|
               next if %w{.. .}.include? verb
               # And create the <schema_root>::<resource>::<verb_schema> constant
-              validation_module.const_get(resource_name).const_set(/(\w+)(\.yaml|\.yml)/.match(verb)[1].capitalize, YAML.load_file(File.join(resource_dir, verb)))
+              validation_module.const_get(resource_name).const_set(/^(\w+)(\.yaml|\.yml)/.match(verb)[1].capitalize, ::YAML.load_file(File.join(resource_dir, verb)))
             end
           end
         end

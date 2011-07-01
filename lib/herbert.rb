@@ -9,7 +9,7 @@ require 'active_support'
 class Sinatra::Base
 	def call(env)
 		begin
-			call!(env)
+			dup.call!(env)
 		rescue => e
 			res = [500,{},[]]
 			if (ENV['HERBERT_DEBUG'].to_i==1) || (ENV['RACK_ENV'] =~ /debug/) then
