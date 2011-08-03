@@ -2,8 +2,9 @@ require 'sinatra/base'
 require 'active_support'
 
 #
-# By default, if there was an error in Herbert, Sinatra would crash without
-# catching the error and Rack would repond with empty 200 response afterwards.
+# FIXME this is ugly
+# By default, if there were an error in Herbert, Sinatra would crash without
+# catching the error and Rack would respond with empty 200 response afterwards.
 # This emulates somewhat consistent behaviour and encapsulation.
 #
 class Sinatra::Base
