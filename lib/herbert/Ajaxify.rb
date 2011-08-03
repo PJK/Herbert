@@ -31,7 +31,7 @@ module Herbert
           Headers[name] = (Headers[name] || []) | value
         }
       else
-        log.h_info("File #{path} doesn't exists; no addition headers loaded")
+        log.h_info("File #{path} doesn't exists; no additional headers loaded")
       end
 
       app.before do
