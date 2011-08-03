@@ -45,7 +45,7 @@ module Herbert
         }
       end
 
-      # Proxy for not CORS enables services such as 
+      # Proxy for not CORS enabled services such as 
       # Google Maps
       # /proxy/url?=
       app.get '/proxy/' do
