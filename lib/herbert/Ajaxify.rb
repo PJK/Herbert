@@ -44,18 +44,26 @@ module Herbert
           response[name] = value.join(', ')
         }
       end
-
+      
+      # enable OPTIONS verb
+      class << Sinatra::Base
+        def http_options path, opts={}, &block
+          route 'OPTIONS', path, opts, &block
+        end
+      end
+      Sinatra::Delegator.delegate :http_options
+      
       # Proxy for not CORS enabled services such as 
       # Google Maps
       # /proxy/url?=
       app.get '/proxy/' do
-				url = URI.parse(URI.encode(params[:url]))
-				res = Net::HTTP.start(url.host, 80) {|http|
-					http.get(url.path + '?' + url.query)
-				}
-				response['content-type'] = res['content-type']
-				res.body
-			end
+        url = URI.parse(URI.encode(params[:url]))
+        res = Net::HTTP.start(url.host, 80) {|http|
+          http.get(url.path + '?' + url.query)
+        }
+        response['content-type'] = res['content-type']
+        res.body
+      end
     end
-	end
+  end
 end
