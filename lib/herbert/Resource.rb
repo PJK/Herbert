@@ -9,9 +9,9 @@ module Herbert
 	#  GET /messages/
   class Resource
 		
-		# Instantizing this class is forbidden
+		# Instantiating this class is forbidden
     def self.new
-      raise StandardError.new('You are not allowed to instantize this class directly')
+      raise StandardError.new('You are not allowed to instantiate this class directly')
     end
 		
 		# Translates Sinatra DSL calls
@@ -24,19 +24,19 @@ module Herbert
     end
   end
 
-	# Loads all Herberts' resources
+	# Loads all Herbert's resources
   module ResourceLoader
 		
 		# Loads all application resources
     def self.registered(app)
-			# Inject refence to the app into Resource
+			# Inject reference to the app into Resource
       Resource.class_eval do
 				define_singleton_method :app do
 					app
 				end
 			end			
 			
-			# And load all resource definitions
+			# And load all resources' definitions
       path = File.join(app.settings.root, 'Resources')
       Dir.new(path).each do |file|
         next if %{. ..}.include? file

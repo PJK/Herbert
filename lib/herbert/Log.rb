@@ -19,7 +19,7 @@ module Sinatra
 					provider = app.log_requests
 				end
         Herbert::AppLogger.provider = provider
-        # Make the app automatically inject refernce to iteself into the response,
+        # Make the app automatically inject a reference to itself into the response,
         # so Sinatra::Response::finish can manipulate it
         app.before { response.app = self; @timer_start = Time.new; }
 				app.after { @timer_stop = Time.new}

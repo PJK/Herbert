@@ -1,9 +1,11 @@
+# Compact JSON "true" strings to 1, JS won't notice
 class True
   def as_json
     return 1
   end
 end
 
+# Serialize objects' IDs as plain strings
 class BSON::ObjectId
   def as_json(*a)
     to_s
