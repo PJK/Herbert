@@ -25,12 +25,15 @@ module Herbert
       end
       
       Range = [('0'..'9').to_a,('a'..'z').to_a].flatten
+      RangeLength = Range.length
+
       def nonce(length = 16)
         res = ''
-        length.times  {res += Range[rand(36)]}
+        length.times  {res += Range[rand(RangeLength)]}
         res
       end
-      
+
+      # MongoDB IDs deserialization helper
       def db_id(source)
         BSON::ObjectId.from_string(source.to_s)
       end

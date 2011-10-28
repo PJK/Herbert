@@ -35,14 +35,12 @@ module Sinatra
     module Extension
       # Um, dragons... Fucking swarm... But I'll try to explain this anyway.
       # We'll scan the defined settings.validation[:path] dir for dirs. Those found dirs
-      # will denote <resource>s. Then, we will scan the "resource" dirs for files.
-      # These files will represent one http <verb>.yaml each. And then, we create hierchy of 
+      # will denote <resource>s. Then, we will scan the "resources" dirs for files.
+      # These files will represent one http <verb>.yaml each. And then, we will create a hierarchy of
       # validation schemas following this pattern: 
       # ::setting.validation[:module]::<resource>::<verb_schema>
-      # where the <verb_schema> equals <verb>.capitalize and contains parsed contents of <verb>.yaml file. 
+      # where the <verb_schema> equals <verb>.capitalize and contains the parsed contents of <verb>.yaml file.
       # Please note that I haven't used a single (.*_)eval even though I was terribly tempted.
-      # And I also documented this method. I'm so awesome, considerate and drunk, am I not?
-      # Uh, yea, and notice the nice cascade of 'end's on the end
       def self.registered(app)
         # Define the ::<schema_root> module
         validation_module = Kernel.const_set(app.settings.validation[:module], Module.new)
