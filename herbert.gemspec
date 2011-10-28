@@ -25,6 +25,8 @@ Herbert is very lightweight and transparent, which makes it easy to use & modify
 	s.add_dependency("activesupport")
 	s.add_dependency("bson_ext",">= 1.3.1")
   s.add_dependency("rake")
+
+  s.add_development_dependency("test-unit")
 	
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
