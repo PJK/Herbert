@@ -4,6 +4,7 @@ require File.dirname(__FILE__) + '/ApplicationError.rb'
 
 module Herbert
   module Error
+
     # Inclusion hook
     def self.registered(app)
       # Disable HTML errors and preliminary reporting
@@ -40,7 +41,9 @@ module Herbert
         end
       end
 
-      #Ummm, nasty.... FIXME
+      #TODO Ummm, nasty.... FIXME
+      # The problem is that 404 - Not Found is not an error, according to Sinatra.
+      # Monkey-patch the emitter?
       app.not_found do
         content_type 'application/json', :charset => 'utf-8'
         {:error => {
@@ -51,7 +54,7 @@ module Herbert
     end
 
     module Helpers
-      # Request-context helper of error states
+      # Request-context helper for error states
       def error(code = 1020, http_code = nil, errors = nil)
         raise Herbert::Error::ApplicationError.new(code, http_code, errors)
       end

@@ -2,8 +2,8 @@ require 'sinatra/base'
 require 'active_support'
 
 #
-# FIXME this is ugly
-# By default, if there were an error in Herbert, Sinatra would crash without
+# TODO: FIXME this is ugly, as it's a duplicate of herbert/Error.rb
+# By default, if there was an error in Herbert, Sinatra would crash without
 # catching the error and Rack would respond with empty 200 response afterwards.
 # This emulates somewhat consistent behaviour and encapsulation.
 #
