@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 Herbert makes development of JSON REST API servers ridiculously simple.
 It provides a set of useful helpers and conventions to speed up development.
 Input validation, logs and advanced AJAX support are baked in.
-Herbert is very lightweight and transparent, making it easy to use & modify.
+Herbert is very lightweight and transparent, which makes it easy to use & modify.
 	desc
 
 	s.add_dependency("sinatra","= 1.2.6")
