@@ -13,7 +13,7 @@ module Herbert
       @@provider = prov
     end
 
-		# Creates log message and passes it to stograge provider
+		# Creates log message and passes it to storage provider
 		#
 		# @param [Sinatra::Request]
 		# @param [Sinatra::Response]
@@ -60,16 +60,17 @@ module Herbert
       end
       # do not log bodies from GET/DELETE/HEAD
       log["request"].delete("body") if %{GET DELETE HEAD}.include?(log["request"]["method"])
-      # If an error has occured, add it
+      # If an error has occurred, add it
       log["response"]["error"] = request.env['sinatra.error'].to_hash if request.env['sinatra.error']
       id = @@provider.save(log)
       response['X-RequestId'] = id.to_s if @@provider.respond_to?(:id) && response.app.settings.append_log_id
     end
   end
-	
+
+  # TODO move to separate file?
 	module LoggingProviders
 		
-		# Dumps all logs to STDOUT with pretty formating
+		# Dumps all logs to STDOUT with pretty formatting
 		class StdoutProvider
 			def initialize
 				require 'pp'
@@ -80,7 +81,7 @@ module Herbert
 			end
 		end
 
-		# Persists log in DB
+		# Persists logs in DB
 		class MongoProvider
 			Collection = 'logs' 
 			def initialize(db)
@@ -92,7 +93,7 @@ module Herbert
 				@db[Collection].save(log)
 			end
     
-			# FIXME
+			# TODO
 			# "Flag" indicating that this provider returns IDs
 			# 
 			# @return [Boolean]

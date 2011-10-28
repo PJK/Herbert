@@ -1,9 +1,10 @@
 module Herbert
 
-  # Provides centralized handling of exceptions in an
+  # Provides centralized handling of exceptions in the
   # application context
   module Error
-    # Error relevant in application context
+
+    # Error relevant in the application context
     class ApplicationError < StandardError
       attr_reader :code, :message, :http_code, :errors
 

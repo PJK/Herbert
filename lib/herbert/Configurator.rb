@@ -3,10 +3,9 @@ module Herbert
 		
 		# Sets up the environment so we can set up Herbert
     module Prepatch
-			
-			#
+
       def self.registered(app)
-        # Enable envs such as development;debug, where debug is herberts debug flag
+        # Enable envs such as development;debug, where debug is Herberts' debug flag
         if (ENV['RACK_ENV'] === nil) || (ENV['RACK_ENV'] === 'test') then
           app.set :environment, :test
           ENV['HERBERT_DEBUG'] = '1'
@@ -20,6 +19,7 @@ module Herbert
     end
     
     module Helpers
+      # We actually need these before Sinatra can provide them
       def staging?
         ENV['RACK_ENV'] == 'staging'
       end
@@ -36,7 +36,6 @@ module Herbert
     def self.registered(app)
       app.enable :logging if app.development?
       #Assume loading by rackup...
-      puts app.settings.root
       app.settings.root ||= File.join(Dir.getwd, 'lib')
       path = File.join(app.settings.root, 'config')
       # Load and evaluate common.rb and appropriate settings

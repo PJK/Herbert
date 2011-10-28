@@ -3,7 +3,7 @@ module Herbert
 	# Enhances AJAJ/AJAX support
   module Ajaxify
 		
-		# Headers to send with each request
+		# Headers to send with each request - base for AJAX CORS
     Headers = {
       'Access-Control-Allow-Methods' => %w{POST GET PUT DELETE OPTIONS},
       'Access-Control-Allow-Headers' => %w{Content-Type X-Requested-With},
@@ -31,7 +31,7 @@ module Herbert
           Headers[name] = (Headers[name] || []) | value
         }
       else
-        log.h_info("File #{path} doesn't exists; no additional headers loaded")
+        log.h_info("File #{path} doesn't exist; no additional headers loaded")
       end
 
       app.before do
@@ -45,7 +45,8 @@ module Herbert
         }
       end
       
-      # enable OPTIONS verb
+      # Enable OPTIONS HTTP verb for AJAX CORS browser validation
+      # TODO check sinatra 1.2.11 for support of new verbs
       class << Sinatra::Base
         def http_options path, opts={}, &block
           route 'OPTIONS', path, opts, &block
