@@ -1,0 +1,1 @@
+# This project is no longer developed nor maintained. All features have been moved to stand-alone gems or added directly to Sinatra
